@@ -51,7 +51,8 @@ public class BaseUtils
 		{
 			if(imgs.containsKey(name)) return (BufferedImage)imgs.get(name);
 
-			BufferedImage img = ImageIO.read(BaseUtils.class.getResource("/net/launcher/theme/" + name + ".png"));
+			//BufferedImage img = ImageIO.read(BaseUtils.class.getResource("/net/launcher/theme/" + name + ".png"));
+			BufferedImage img = ImageIO.read(BaseUtils.class.getResource("/assets/png/" + name + ".png"));
 			imgs.put(name, img);
 			send("Opened local image: " + name + ".png");
 			return img;

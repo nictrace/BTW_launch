@@ -113,7 +113,7 @@ public class Combobox extends JComponent implements MouseListener, MouseMotionLi
 			entered = BaseUtils.contains(x, y, getX(), getY(), getWidth(), getHeight());
 		}
 		try {
-			new MusPlay("click.mp3");
+			new MusPlay("/assets/mp3/click.mp3");
 		} catch(Exception e1) {}
 		pressed = !pressed;
 		repaint();

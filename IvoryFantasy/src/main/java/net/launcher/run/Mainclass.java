@@ -15,7 +15,7 @@ public class Mainclass {
         if(test) {
 			File dir = new File(BaseUtils.getAssetsDir().toString());
 			if(!dir.exists()) dir.mkdirs();
-			InputStream stream = Starter.class.getResourceAsStream("/net/launcher/theme/favicon.png");
+			InputStream stream = Starter.class.getResourceAsStream("/assets/png/favicon.png");
 		    OutputStream resStreamOut = null;
 		    int readBytes;
 		    byte[] buffer = new byte[4096];
@@ -33,7 +33,7 @@ public class Mainclass {
 			Frame.start();
 			if(BaseUtils.getPropertyBoolean("Music", true))
 			{
-	           new MusPlay(Settings.iMusicname);
+	           new MusPlay("/assets/mp3/" + Settings.iMusicname);
 	        }
         } else {
         	Starter.main(null);

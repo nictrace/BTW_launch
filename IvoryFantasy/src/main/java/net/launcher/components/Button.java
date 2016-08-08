@@ -54,7 +54,7 @@ protected void paintComponent(Graphics maing) {
 	if ((this.pressed) && (this.entered)) {
 		this.entered = false;
 		try {
-			new MusPlay("click.mp3");
+			new MusPlay("/assets/mp3/click.mp3");
 		} catch(Exception e) {}
 		g.drawImage(ImageUtils.genButton(w, h, this.pressedTX), 0, 0, w, h, null);
 		this.pressed = false;

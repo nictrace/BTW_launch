@@ -51,7 +51,7 @@ public class Dragbutton extends JButton implements MouseListener, MouseMotionLis
 		if ((this.pressed) && (this.entered)) {
 			this.entered = false;
 			try {
-				new MusPlay("click.mp3");
+				new MusPlay("/assets/mp3/click.mp3");
 			} catch(Exception e) {}
 			g.drawImage(img3, 0, 0, getWidth(), getHeight(), null);
 			this.pressed = false;
