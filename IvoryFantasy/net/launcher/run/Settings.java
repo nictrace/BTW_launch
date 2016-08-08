@@ -4,17 +4,17 @@ package net.launcher.run;
 public class Settings {
 	/** Настройка заголовка лаунчера */
    public static final String title 			= "";
-   public static final String titleInGame 		= "SpaceTechnology";
-   public static final String baseconf 			= "SpaceTechnology";
-   public static final String pathconst 		= "SpaceTechnology/%SERVERNAME%";
+   public static final String titleInGame 		= "IvoryFantasy";
+   public static final String baseconf 			= "IvoryFantasy";
+   public static final String pathconst 		= "IvoryFantasy/%SERVERNAME%";
    public static final String skins 			= "MinecraftSkins/";
    public static final String cloaks 			= "MinecraftCloaks/";
 	/** Параметры подключения */
    public static final String http 				= "http://";   
-   public static final String domain 			= "galaxytechnology.myarena.ru";
+   public static final String domain 			= "ivoryfantasy.myarena.ru";
    public static final String siteDir 			= "site";
    public static final String RegisterUrl 		= http+"localhost/"; //Ссылка на регистрацию, при useRegister = false   
-   public static final String updateFile 		= http+domain+"/"+siteDir+"/launcher/SpaceTechnology";
+   public static final String updateFile 		= http+domain+"/"+siteDir+"/launcher/IvoryFantasy";
    public static final String buyVauncherLink 	= "";
    public static final String iMusicname 		= "001.mp3";
    public static final String[] p = new String[]{"wireshark", "cheat"};   //Список запрещенных процессов.
@@ -34,7 +34,7 @@ public class Settings {
    {
 	    //Для отключения добавьте в адрес ссылки #
 		//"url::http://",
-		" Сайт::http://galaxytechnology.myarena.ru",
+		" Сайт::http://ivoryfantasy.myarena.ru",
    };
    
 	/** Настройки структуры лаунчера */   
@@ -59,11 +59,7 @@ public class Settings {
    public static final String masterVersion = "1.2";
 
    public static boolean patchDir = false;				 //Использовать автоматическую замену директории игры (true/false)
-   
    public static boolean release = true;
-
-   
-
    public static void onStart() {}
    public static void onStartMinecraft() {}
 }
