@@ -12,7 +12,7 @@ public class Settings {
 	/** Параметры подключения */
    public static final String http 				= "http://";   
    public static final String domain 			= "ivoryfantasy.myarena.ru";
-   public static final String siteDir 			= "site";
+   public static final String siteDir 			= "addons/launcher";
    public static final String RegisterUrl 		= http+"localhost/"; //Ссылка на регистрацию, при useRegister = false   
    public static final String updateFile 		= http+domain+"/"+siteDir+"/launcher/IvoryFantasy";
    public static final String buyVauncherLink 	= "";
