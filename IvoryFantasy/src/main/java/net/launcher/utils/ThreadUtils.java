@@ -121,6 +121,7 @@ public class ThreadUtils
 			} else if(answer.contains("client<$>"))
 			{
 				Frame.main.panel.tmpString =  Message.client.replace("%%", answer.replace("client<$>", "клиент"));
+				BaseUtils.sendErr(Frame.main.panel.tmpString);
 				error = true;
 			} else if(answer.contains("temp<$>"))
 			{

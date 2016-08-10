@@ -14,7 +14,7 @@ public class Settings {
    public static final String domain 			= "ivoryfantasy.myarena.ru";
    public static final String siteDir 			= "addons/launcher";
    public static final String RegisterUrl 		= http+"localhost/"; //Ссылка на регистрацию, при useRegister = false   
-   public static final String updateFile 		= http+domain+"/"+siteDir+"/launcher/IvoryFantasy";
+   public static final String updateFile 		= http+domain+"/"+siteDir+"/update/IvoryFantasy";
    public static final String buyVauncherLink 	= "";
    public static final String iMusicname 		= "001.mp3";
    public static final String[] p = new String[]{"wireshark", "cheat"};   //Список запрещенных процессов.
