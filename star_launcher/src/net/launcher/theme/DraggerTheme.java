@@ -1,6 +1,7 @@
 package net.launcher.theme;
 
 import java.awt.Color;
+
 import net.launcher.components.DragbuttonStyle;
 import net.launcher.components.DraggerStyle;
 import net.launcher.components.TitleStyle;

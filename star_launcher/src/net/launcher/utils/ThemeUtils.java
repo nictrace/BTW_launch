@@ -21,10 +21,10 @@ public class ThemeUtils extends BaseUtils {
 
       for(int var4 = 0; var4 < var3; ++var4) {
          LinkLabel link = var2[var4];
-         LoginTheme.links.apply(link);
+//        LoginTheme.links.apply(link);		// закомментированы ссылки
          FontMetrics fm = link.getFontMetrics(link.getFont());
-         link.setBounds(i + LoginTheme.links.x, LoginTheme.links.y, fm.stringWidth(link.getText()), fm.getHeight());
-         i += fm.stringWidth(link.getText()) + LoginTheme.links.margin;
+//       link.setBounds(i + LoginTheme.links.x, LoginTheme.links.y, fm.stringWidth(link.getText()), fm.getHeight());
+//         i += fm.stringWidth(link.getText()) + LoginTheme.links.margin;
       }
 
       DraggerTheme.title.apply(main.title);

@@ -8,7 +8,6 @@ import net.launcher.components.Align;
 import net.launcher.components.ButtonStyle;
 import net.launcher.components.ComboboxStyle;
 import net.launcher.components.ComponentStyle;
-import net.launcher.components.LinklabelStyle;
 import net.launcher.components.PassfieldStyle;
 import net.launcher.components.ServerbarStyle;
 import net.launcher.components.TextfieldStyle;
@@ -26,7 +25,7 @@ public class LoginTheme {
    public static TextfieldStyle login = new TextfieldStyle(128, 200, 250, 38, "textfield", "font", 16.0F, Color.decode("0xA67A53"), Color.decode("0xA67A53"), new EmptyBorder(0, 10, 0, 10));
    public static PassfieldStyle password = new PassfieldStyle(128, 250, 250, 38, "textfield", "font", 19.0F, Color.decode("0xA67A53"), Color.decode("0xA67A53"), "1", new EmptyBorder(0, 10, 0, 10));
    public static ComponentStyle newsBrowser = new ComponentStyle(20, 60, 660, 60, "font", 0.0F, Color.WHITE, true);
-   public static LinklabelStyle links = new LinklabelStyle(420, 280, 0, "font", 16.0F, Color.WHITE, Color.LIGHT_GRAY);
+   //public static LinklabelStyle links = new LinklabelStyle(420, 280, 0, "font", 16.0F, Color.WHITE, Color.LIGHT_GRAY);
    public static ButtonStyle update_exe = new ButtonStyle(96, 440, 150, 47, "font", "button", 16.0F, Color.decode("0xd4dc7b"), true, Align.CENTER);
    public static ButtonStyle update_jar = new ButtonStyle(262, 440, 150, 47, "font", "button", 16.0F, Color.decode("0xd4dc7b"), true, Align.CENTER);
    public static ButtonStyle update_no = new ButtonStyle(600, 0, 0, 0, "font", "button", 0.0F, Color.decode("0xd4dc7b"), true, Align.CENTER);
