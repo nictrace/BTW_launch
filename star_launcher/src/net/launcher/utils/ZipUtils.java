@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -43,7 +44,11 @@ public class ZipUtils {
 					}
                 }
 				else {
-					FileOutputStream fOutput = new FileOutputStream(file);
+					if(Files.notExists(file.toPath().getParent())){
+						Files.createDirectory(file.toPath().getParent());
+					}
+					
+					FileOutputStream fOutput = new FileOutputStream(file);					
 					int count = 0;
 					while ((count = zipInput.read(buffer)) > 0) {
 						// write 'count' bytes to the file output stream
