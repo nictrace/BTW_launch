@@ -706,14 +706,14 @@ public class BaseUtils
 
    public static void updateLauncher() throws Exception {
       send("Launcher updater started...");
-      //http://galaxytechnology.myarena.ru/site/launcher/SpaceTechnology32.exe
+      //http://galaxytechnology.myarena.ru/addons/launcher/update/IvoryFantasy32.exe
       String uri = Settings.updateFile;
       if(Frame.jar.compareTo(".exe")==0){
     	  String x = System.getProperty("sun.arch.data.model");
     	  if(x.compareTo("32")==0) uri += "32";
     	  else uri +="64";
       }
-      uri += Frame.jar;
+      uri += Frame.jar;	// расширение текущего лаунчера
       
       send("Downloading file: "+uri);
       BufferedInputStream is = new BufferedInputStream((new URL(uri)).openStream());

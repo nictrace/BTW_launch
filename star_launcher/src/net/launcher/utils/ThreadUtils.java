@@ -346,12 +346,15 @@ public class ThreadUtils
   
   public static void pollSelectedServer()
   {
-    try
-    {
-      serverPollThread.interrupt();
-      serverPollThread = null;
-    }
-    catch (Exception e) {}
+	  if(serverPollThread != null){
+		  try {
+			  serverPollThread.interrupt();
+			  serverPollThread = null;
+		  }
+		  catch (Exception e) {
+		        BaseUtils.send(e.getMessage());
+		  }
+	}
     BaseUtils.send("Refreshing server state... (" + Frame.main.servers.getSelected() + ")");
     serverPollThread = new Thread()
     {

@@ -44,7 +44,7 @@ public class ZipUtils {
 					}
                 }
 				else {
-					if(Files.notExists(file.toPath().getParent())){
+					if(Files.notExists(file.toPath().getParent())){		// if target directory's not created
 						Files.createDirectory(file.toPath().getParent());
 					}
 					

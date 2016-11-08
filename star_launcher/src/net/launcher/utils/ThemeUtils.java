@@ -2,10 +2,8 @@ package net.launcher.utils;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FontMetrics;
 
 import net.launcher.components.Frame;
-import net.launcher.components.LinkLabel;
 import net.launcher.theme.DraggerTheme;
 import net.launcher.theme.LoginTheme;
 import net.launcher.theme.OptionsTheme;
@@ -14,19 +12,20 @@ import net.launcher.theme.RegTheme;
 
 public class ThemeUtils extends BaseUtils {
 
-   public static void updateStyle(Frame main) throws Exception {
-      int i = 0;
-      LinkLabel[] var2 = main.links;
-      int var3 = var2.length;
+	public static void updateStyle(Frame main) throws Exception {
+/*
+ 		int i = 0;
+		LinkLabel[] var2 = main.links;
+		int var3 = var2.length;
 
-      for(int var4 = 0; var4 < var3; ++var4) {
-         LinkLabel link = var2[var4];
-//        LoginTheme.links.apply(link);		// закомментированы ссылки
-         FontMetrics fm = link.getFontMetrics(link.getFont());
-//       link.setBounds(i + LoginTheme.links.x, LoginTheme.links.y, fm.stringWidth(link.getText()), fm.getHeight());
-//         i += fm.stringWidth(link.getText()) + LoginTheme.links.margin;
-      }
-
+		for(int var4 = 0; var4 < var3; ++var4) {
+			LinkLabel link = var2[var4];
+			LoginTheme.links.apply(link);		// закомментированы ссылки
+			FontMetrics fm = link.getFontMetrics(link.getFont());
+			link.setBounds(i + LoginTheme.links.x, LoginTheme.links.y, fm.stringWidth(link.getText()), fm.getHeight());
+			i += fm.stringWidth(link.getText()) + LoginTheme.links.margin;
+		}
+*/
       DraggerTheme.title.apply(main.title);
       DraggerTheme.dragger.apply(main.dragger);
       DraggerTheme.dbuttons.apply(main.hide, main.close);

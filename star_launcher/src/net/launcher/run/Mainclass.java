@@ -12,7 +12,7 @@ import net.launcher.utils.BaseUtils;
 public class Mainclass {
 
    public static void main(String[] args) throws Exception {
-      boolean test = args.length != 0?args[0].equals("true"):false;
+      boolean test = (args.length != 0) ? args[0].equals("true") : false;
       if(test) {
          File dir = new File(BaseUtils.getAssetsDir().toString());
          if(!dir.exists()) {
@@ -41,11 +41,10 @@ public class Mainclass {
          
          Frame.start();
          if(BaseUtils.getPropertyBoolean("Music", true)) {
-            new MusPlay("");
+        	 new MusPlay(Settings.iMusicname);
          }
       } else {
          Starter.main((String[])null);
       }
-
    }
 }
