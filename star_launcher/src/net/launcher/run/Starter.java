@@ -24,7 +24,8 @@ public class Starter {
          }
 
          m1.add("-Xmx" + x1 + "m");
-         m1.add("-XX:MaxPermSize=128m");
+         //m1.add("-XX:MaxPermSize=128m"); - для java8 не актуально
+         m1.add("-XX:+DisableAttachMechanism");
          if(System.getProperty("os.name").toLowerCase().startsWith("mac")) {
             m1.add("-Xdock:name=Minecraft");
             m1.add("-Xdock:icon=" + BaseUtils.getAssetsDir().toString() + "/favicon.png");
@@ -50,6 +51,7 @@ public class Starter {
             Method m = x.getDeclaredMethod("halt0", new Class[]{Integer.TYPE});
             m.setAccessible(true);
             m.invoke((Object)null, new Object[]{Integer.valueOf(1)});
+            
          } catch (Exception var6) {
             ;
          }

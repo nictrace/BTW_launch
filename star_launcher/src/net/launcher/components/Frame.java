@@ -38,6 +38,7 @@ import net.launcher.utils.GuardUtils;
 import net.launcher.utils.ImageUtils;
 import net.launcher.utils.ThemeUtils;
 import net.launcher.utils.ThreadUtils;
+import net.launcher.utils.NetGuard;
 
 public class Frame extends JFrame implements ActionListener, FocusListener
 {
@@ -104,16 +105,15 @@ public class Frame extends JFrame implements ActionListener, FocusListener
   public Button buyPremium = new Button("");
   public Button buyUnban = new Button(Message.buyUnban);
   public Button toGamePersonal = new Button(Message.GamePersonal);
-
   
   public Frame()
   {
-    try {
-    	/* для проверки повторных запусков открывается фиктивный порт на клиенте */
-      ServerSocket socket = new ServerSocket(Integer.parseInt("65534"),3,InetAddress.getByName("localhost"));
-      Socket soc = new Socket(socket);
-      soc.start();
-    } catch (IOException var2) {
+	  try {
+		  /* для проверки повторных запусков открывается фиктивный порт на клиенте */
+		  ServerSocket socket = new ServerSocket(Integer.parseInt("65534"),3,InetAddress.getByName("localhost"));
+		  Socket soc = new Socket(socket);
+		  soc.start();
+	  } catch (IOException var2) {
     	JOptionPane.showMessageDialog(Frame, "Запуск второй копии лаунчера невозможен!", "Лаунчер уже запущен", 0);
     	try {
         Class<?> af = Class.forName("java.lang.Shutdown");
@@ -122,6 +122,44 @@ public class Frame extends JFrame implements ActionListener, FocusListener
         m.invoke(null, new Object[] { Integer.valueOf(1) });
       } catch (Exception e) { }
     }
+    // запускается NetGuard
+    
+    if(BaseUtils.getPlatform() == 2){
+	Thread ng = new Thread(new Runnable() {
+		public void run() {
+
+			ServerSocket srvSocket = null;
+			try {
+				try {
+					int i = 0; // Счётчик подключений
+					// Подключение сокета к localhost
+					srvSocket = new ServerSocket(65533, 0, InetAddress.getByName("localhost"));
+					BaseUtils.send("NetGuard started");
+
+					while(true) {
+						// ожидание подключения
+						java.net.Socket socket = srvSocket.accept();
+						BaseUtils.send("[NETGUARD]: Client accepted");
+						// Стартуем обработку клиента в отдельном потоке
+						new NetGuard().setSocket(i++, socket);
+					}
+				} catch(Exception e) {
+					System.out.println("Exception : " + e);
+				}
+			} finally {
+				try {
+					if (srvSocket != null)
+						srvSocket.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	});
+	ng.start();
+    }
+    //----------------------------------------------------
+    
     
     setIconImage(BaseUtils.getLocalImage("favicon"));
     setDefaultCloseOperation(3);
@@ -345,7 +383,7 @@ public class Frame extends JFrame implements ActionListener, FocusListener
 
 	public static void start()
 	{
-		Thread ch = new Thread(new Runnable() { // это чекалка, запускается раз в полминуты
+		Thread ch = new Thread(new Runnable() { // проверяет наличие запрещенных процессов каждые 30 сек 
 		public void run() {
 			while (true) {
 				GuardUtils.check();

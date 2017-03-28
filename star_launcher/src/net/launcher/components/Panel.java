@@ -86,7 +86,7 @@ public class Panel extends JPanel
       g.drawString(Message.str3, UpdateTheme.stringsX, UpdateTheme.stringsY + 60);
       g.drawString(Message.str4, UpdateTheme.stringsX, UpdateTheme.stringsY + 80);
       g.drawString(Message.str5, UpdateTheme.stringsX, UpdateTheme.stringsY + 100);
-      g.drawString(Message.str6.replace("%%", "1.2"), UpdateTheme.stringsX, UpdateTheme.stringsY + 120);
+      g.drawString(Message.str6.replace("%%", Settings.masterVersion), UpdateTheme.stringsX, UpdateTheme.stringsY + 120);
       g.drawString(Message.str7.replace("%%", this.tmpString), UpdateTheme.stringsX, UpdateTheme.stringsY + 140);
       if ((this.type == 8) || (this.type == 9))
       {

@@ -95,16 +95,17 @@ public class ThreadUtils
               error = true;
             }
           }
+          BaseUtils.sendErr("auth:" + BaseUtils.getClientName() + ":" + Frame.login.getText() + ":" + ThreadUtils.token + ":" + GuardUtils.hash(ThreadUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL()) + ":" + Frame.token);
           String answer2 = BaseUtils.execute(BaseUtils.buildUrl("launcher.php"), new Object[] { "action", 
-          
-            ThreadUtils.encrypt("auth:" + BaseUtils.getClientName() + ":" + Frame.login.getText() + ":" + ThreadUtils.token + ":" + GuardUtils.hash(ThreadUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL()) + ":" + Frame.token, Settings.key1) });
+
+          encrypt("auth:" + BaseUtils.getClientName() + ":" + Frame.login.getText() + ":" + ThreadUtils.token + ":" + GuardUtils.hash(ThreadUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL()) + ":" + Frame.token, Settings.key1) });
           
           BaseUtils.send(answer2);
           String answer = null;
           System.err.println();
           try
           {
-            answer = ThreadUtils.decrypt(answer2, Settings.key1);	// "bohdan4ik0460469"
+            answer = ThreadUtils.decrypt(answer2, Settings.key1);
           }
           catch (Exception e)
           {

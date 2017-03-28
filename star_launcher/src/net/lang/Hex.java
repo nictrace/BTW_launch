@@ -37,7 +37,7 @@ public final class Hex {
        catch (IOException ex) {}
        return a;
    }
-
+// используется в y.toString()
    public static Appendable append(Appendable a, byte[] bytes) {
        try {
            for (byte b : bytes) {

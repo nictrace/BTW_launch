@@ -1,12 +1,11 @@
-/*
- * Decompiled with CFR 0_114.
- */
 package net.launcher.components;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 //import java.awt.Image;
 //import java.awt.LayoutManager;
 //import java.awt.Rectangle;
@@ -14,13 +13,17 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 //import java.io.Console;
 import java.io.File;
+import java.io.IOException;
 //import java.io.OutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.ProcessBuilder;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Icon;
 //import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -59,7 +62,7 @@ public class Game extends JFrame {
         catch (Exception e) {
             // empty catch block
         }
-        System.out.println("worked!");
+
         String user = answer.split("<br>")[1].split("<:>")[0];
         String session = EncodingUtils.xorencode(EncodingUtils.inttostr(answer.split("<br>")[1].split("<:>")[1]), Settings.protectionKey);
         Thread ch = new Thread(new Runnable(){
@@ -271,6 +274,73 @@ public class Game extends JFrame {
                 catch (ClassNotFoundException e) {
                     // empty catch block
                 }
+                
+/*	============ Запуск модуля защиты =============== */
+                if(BaseUtils.getPlatform() == 2){
+                	try{
+                		BaseUtils.send("Statring guard...");
+                		String bits = System.getProperty("sun.arch.data.model");
+                		if(bits == "32") bits="";
+                		String pf = BaseUtils.getMcDir().getPath();
+                		pf += "\\config\\guard\\mGuard" + bits + ".exe";
+                		BaseUtils.send("Launching: " + pf);
+                		File f = new File(pf);
+                	    if(!f.exists()) {
+            	            JOptionPane.showMessageDialog(null, "Модуль защиты не обнаружен!", "Ошибка запуска", 0, (Icon)null);
+            	            Runtime.getRuntime().halt(1);
+                	    }
+                		ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", pf);
+                    	pb.start(); 	// команда исполнится в любом случае, т.к cmd.exe есть везде
+
+                    	// теперь надо завести таймер на минуту, и вырубить всё, если нет соединения...
+                    	timer = new Timer(60000, new ActionListener() {
+
+							public void actionPerformed(ActionEvent evt) {
+								Thread.currentThread().setName("NetGuard-tmr");
+                    	        if (Settings.GuardState.get() != 1) {
+                    	            timer.stop();
+                    	            
+                    	            BaseUtils.send("Guard module not loaded yet, stoppnig game...");
+                    	            //Class<?> af;
+									try {
+										cl.close();		// closing classloadres
+										/*
+										af = Class.forName("java.lang.Shutdown");
+	                                    Method m = af.getDeclaredMethod("halt0", Integer.TYPE);
+	                                    m.setAccessible(true);
+	                                    m.invoke(null, new Object[] { Integer.valueOf(1) });
+	                                    
+									} catch (ClassNotFoundException e) {
+										e.printStackTrace();
+									} catch (NoSuchMethodException e) {
+										e.printStackTrace();
+									} catch (SecurityException e) {
+										e.printStackTrace();
+									} catch (IllegalAccessException e) {
+										e.printStackTrace();
+									} catch (IllegalArgumentException e) {
+										e.printStackTrace();
+									} catch (InvocationTargetException e) {
+										e.printStackTrace();*/
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+//                    	            BaseUtils.sendErr("[NetGuard]: halt won't work, trying hard methods...");
+//                    	            Runtime.getRuntime().halt(1);
+                    	        }
+                    	    }    
+                    	});
+                    	// временно закомментил, для проверки DisableAttachMechanism
+                    	//timer.start();	// запустим этот таймер 
+                    	
+                	} catch (IOException e){
+                		BaseUtils.send("process launch error!");
+                		JOptionPane.showMessageDialog(Frame.main, "Модуль защиты не запускается!", "Ошибка запуска", 0, (Icon)null);
+                		Runtime.getRuntime().halt(1);
+                	}
+                }
+/*	================================================= */
+                
                 Cl = tweakClass ? "net.minecraft.launchwrapper.Launch" : "net.minecraft.client.main.Main";
                 Frame.main.setVisible(false);
                 GuardUtils.delete(new File(assets + "assets/skins"));

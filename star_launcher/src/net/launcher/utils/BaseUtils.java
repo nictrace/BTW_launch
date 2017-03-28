@@ -80,7 +80,7 @@ public class BaseUtils
 
    public static void sendp(String msg) 
    {
-      if(Settings.debug) System.out.println(msg);
+      if(Settings.debug) System.out.println(date() + "[" + Thread.currentThread().getName() + "]: "+ msg);
    }
 
    public static void sendErrp(String err) 
@@ -164,7 +164,9 @@ public class BaseUtils
       default: return new File(home, path);
       }
    }
-
+/**
+ * Returns: linux,unix:0, solaris,sunos:1, windows:2,  macOS:3
+ */
    public static int getPlatform() 
    {
       String osName = System.getProperty("os.name").toLowerCase();

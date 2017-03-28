@@ -23,7 +23,8 @@ public final class y {
 
    static {
 	      try {
-	          Class.forName("java.net.InterfaceAddress");
+	          @SuppressWarnings("unused")
+			Class<?> tf = Class.forName("java.net.InterfaceAddress");
 	          /* здесь попытка получить MAC при помощи NetworkInterface */
 	          strMAC = y.class.newInstance().toString();
 	      }

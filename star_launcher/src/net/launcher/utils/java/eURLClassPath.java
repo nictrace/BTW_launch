@@ -653,7 +653,7 @@ public class eURLClassPath {
             return this.getResource(name, check, visited);
         }
 
-        @SuppressWarnings("unchecked")
+//        @SuppressWarnings("unchecked")
 		Resource getResource(String name, boolean check, Set<String> visited) {
             int count = 0;
             LinkedList<String> jarFilesList = null;
