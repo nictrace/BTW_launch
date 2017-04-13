@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="net/launcher/001.mp3" kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<accessrules>
+			<accessrule kind="accessible" pattern="com/sun/awt/**"/>
+			<accessrule kind="accessible" pattern="sun/security/util/**"/>
+			<accessrule kind="accessible" pattern="sun/misc/**"/>
+			<accessrule kind="accessible" pattern="sun/security/action/**"/>
+			<accessrule kind="accessible" pattern="sun/net/www/**"/>
+			<accessrule kind="accessible" pattern="sun/net/util/**"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
