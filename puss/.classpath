@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<accessrules>
+			<accessrule kind="accessible" pattern="sun/security/util/Debug"/>
+			<accessrule kind="accessible" pattern="sun/security/util/*"/>
+			<accessrule kind="accessible" pattern="sun/misc/Resource/*"/>
+			<accessrule kind="accessible" pattern="com/sun/awt/*"/>
+			<accessrule kind="accessible" pattern="sun/misc/**"/>
+			<accessrule kind="accessible" pattern="sun/net/www/*"/>
+			<accessrule kind="accessible" pattern="sun/net/util/*"/>
+			<accessrule kind="accessible" pattern="sun/security/action/GetPropertyAction"/>
+			<accessrule kind="accessible" pattern="sun/net/www/protocol/file/FileURLConnection"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="output" path=""/>
+</classpath>
