@@ -100,7 +100,7 @@ public class ThreadUtils
 
           encrypt("auth:" + BaseUtils.getClientName() + ":" + Frame.login.getText() + ":" + ThreadUtils.token + ":" + GuardUtils.hash(ThreadUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL()) + ":" + Frame.token, Settings.key1) });
           
-          BaseUtils.send(answer2);
+//          BaseUtils.send(answer2);
           String answer = null;
           System.err.println();
           try
@@ -418,7 +418,7 @@ public class ThreadUtils
         
           ThreadUtils.encrypt(get + ":0:" + Frame.login.getText() + ":" + ThreadUtils.token, Settings.key1), "ufile", bytes64 });
         
-        BaseUtils.send(answer);
+//        BaseUtils.send(answer);
         boolean error = false;
         if (answer == null)
         {
@@ -838,77 +838,76 @@ public class ThreadUtils
     {
       public void run()
       {
-        String answer = BaseUtils.execute(BaseUtils.buildUrl("launcher.php"), new Object[] { "action", 
-        
+    	  String answer = BaseUtils.execute(BaseUtils.buildUrl("launcher.php"), new Object[] { "action", 
           ThreadUtils.encrypt("buyunban:0:" + Frame.login.getText() + ":" + ThreadUtils.token, Settings.key1) });
         
-        boolean error = false;
-        if (answer == null)
-        {
-          Frame.main.panel.tmpString = Message.Null;
-          error = true;
-        }
-        else if (answer.contains("moneyno"))
-        {
-          Frame.main.panel.tmpString = Message.moneyno;
-          error = true;
-        }
-        else if (answer.contains("banno"))
-        {
-          Frame.main.panel.tmpString = Message.banno;
-          error = true;
-        }
-        else if (answer.contains("moneyno"))
-        {
-          Frame.main.panel.tmpString = Message.moneyno;
-          error = true;
-        }
-        else if (answer.contains("errorLogin"))
-        {
-          Frame.main.panel.tmpString = Message.errorLogin;
-          error = true;
-        }
-        else if (answer.contains("errorsql"))
-        {
-          Frame.main.panel.tmpString = Message.errorsql;
-          error = true;
-        }
-        else if (answer.contains("temp"))
-        {
-          Frame.main.panel.tmpString = Message.temp;
-          error = true;
-        }
-        else if (answer.contains("noactive"))
-        {
-          Frame.main.panel.tmpString = Message.noactive;
-          error = true;
-        }
-        else if (answer.contains("badhash"))
-        {
-          Frame.main.panel.tmpString = Message.badhash;
-          error = true;
-        }
-        else if (!answer.contains("success"))
-        {
-          Frame.main.panel.tmpString = answer;
-          error = true;
-        }
-        if (error)
-        {
-          Frame.main.panel.tmpColor = Color.red;
-          try
-          {
-            sleep(2000L);
-          }
-          catch (InterruptedException e) {}
-          Frame.main.setPersonal(Frame.main.panel.pc);
-          return;
-        }
-        String[] s = answer.split(":");
-        Frame.main.panel.pc.ugroup = s[2];
-        Frame.main.buyUnban.setEnabled(false);
-        Frame.main.panel.pc.realmoney = Integer.parseInt(s[1]);
-        Frame.main.setPersonal(Frame.main.panel.pc);
+    	  boolean error = false;
+    	  if (answer == null)
+    	  {
+    		  Frame.main.panel.tmpString = Message.Null;
+    		  error = true;
+    	  }
+    	  else if (answer.contains("moneyno"))
+    	  {
+    		  Frame.main.panel.tmpString = Message.moneyno;
+    		  error = true;
+    	  }
+    	  else if (answer.contains("banno"))
+    	  {
+    		  Frame.main.panel.tmpString = Message.banno;
+    		  error = true;
+    	  }
+    	  else if (answer.contains("moneyno"))
+    	  {
+    		  Frame.main.panel.tmpString = Message.moneyno;
+    		  error = true;
+    	  }
+    	  else if (answer.contains("errorLogin"))
+    	  {
+    		  Frame.main.panel.tmpString = Message.errorLogin;
+    		  error = true;
+    	  }
+    	  else if (answer.contains("errorsql"))
+    	  {
+    		  Frame.main.panel.tmpString = Message.errorsql;
+    		  error = true;
+    	  }
+    	  else if (answer.contains("temp"))
+    	  {
+    		  Frame.main.panel.tmpString = Message.temp;
+    		  error = true;
+    	  }
+    	  else if (answer.contains("noactive"))
+    	  {
+    		  Frame.main.panel.tmpString = Message.noactive;
+    		  error = true;
+    	  }
+    	  else if (answer.contains("badhash"))
+    	  {
+    		  Frame.main.panel.tmpString = Message.badhash;
+    		  error = true;
+    	  }
+    	  else if (!answer.contains("success"))
+    	  {
+    		  Frame.main.panel.tmpString = answer;
+    		  error = true;
+    	  }
+    	  if (error)
+    	  {
+    		  Frame.main.panel.tmpColor = Color.red;
+    		  try
+    		  {
+    			  sleep(2000L);
+    		  }
+    		  catch (InterruptedException e) {}
+    		  Frame.main.setPersonal(Frame.main.panel.pc);
+    		  return;
+    	  }
+    	  String[] s = answer.split(":");
+    	  Frame.main.panel.pc.ugroup = s[2];
+    	  Frame.main.buyUnban.setEnabled(false);
+    	  Frame.main.panel.pc.realmoney = Integer.parseInt(s[1]);
+    	  Frame.main.setPersonal(Frame.main.panel.pc);
       }
     }.start();
   }

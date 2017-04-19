@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0_114.
- */
 package net.launcher.utils.java;
 
 import java.io.Closeable;
@@ -653,8 +650,7 @@ public class eURLClassPath {
             return this.getResource(name, check, visited);
         }
 
-//        @SuppressWarnings("unchecked")
-		Resource getResource(String name, boolean check, Set<String> visited) {
+        Resource getResource(String name, boolean check, Set<String> visited) {
             int count = 0;
             LinkedList<String> jarFilesList = null;
             jarFilesList = (LinkedList<String>)this.index.get(name);

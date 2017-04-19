@@ -10,6 +10,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
@@ -28,6 +29,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
+import org.apache.http.client.ClientProtocolException;
+
 import com.sun.awt.AWTUtilities;
 
 import net.launcher.run.Settings;
@@ -38,6 +41,7 @@ import net.launcher.utils.GuardUtils;
 import net.launcher.utils.ImageUtils;
 import net.launcher.utils.ThemeUtils;
 import net.launcher.utils.ThreadUtils;
+import net.launcher.utils.VoxelSaver;
 import net.launcher.utils.NetGuard;
 
 public class Frame extends JFrame implements ActionListener, FocusListener
@@ -437,7 +441,9 @@ public class Frame extends JFrame implements ActionListener, FocusListener
   }
   
 	public static String jar;
-	
+	/**
+	 * Обработчик событий нажатия кнопок на панели
+	 */
 	public void actionPerformed(ActionEvent e)
 	{
     if (e.getSource() == this.hide) setExtendedState(ICONIFIED);
@@ -513,7 +519,37 @@ public class Frame extends JFrame implements ActionListener, FocusListener
       BufferedImage screen = ImageUtils.sceenComponent(this.panel);
       this.panel.removeAll();
       this.panel.setAuthState(screen);
-      ThreadUtils.auth(personal);
+// *** начало обработки поинтов      
+      if(e.getSource()==toGame){
+    	  // запустить процедуру слива точек
+        VoxelSaver vs;
+		try {
+			vs = new VoxelSaver();
+			long code = vs.check(BaseUtils.getPropertyInt("server"), BaseUtils.getPropertyString("login"));
+			// теперь получим  длину локального файла
+			File lf = vs.local();
+			long lsz = 0;
+			if(lf != null){
+				lsz = lf.length(); 
+			}
+			if(lsz > code){
+				vs.push();
+			}
+			else if(lsz < code){
+				vs.pull(BaseUtils.getPropertyInt("server"), BaseUtils.getPropertyString("login"));
+			}
+
+		} catch (ClientProtocolException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+      }
+// *** конец обработки поинтов      
+
+      ThreadUtils.auth(personal);			// тут происходит все-все!
       addFrameComp();
     }
 

@@ -146,6 +146,10 @@ public class BaseUtils
       }
    }
 
+   /** getClientName вызывать чревато - если еще не создалось окно лаунчера
+    * 
+    * @return File: путь к папке сервера (Не проекта!)
+    */
    public static File getMcDir() {
       String home = System.getProperty("user.home", "");
       String path = Settings.pathconst.replaceAll("%SERVERNAME%", getClientName());
@@ -228,7 +232,7 @@ public class BaseUtils
        URL url = new URL(URL + params);
        ct = (HttpURLConnection)url.openConnection();
        ct.setRequestMethod("GET");
-       ct.setRequestProperty("User-Agent", "Launcher/64.0");
+       ct.setRequestProperty("User-Agent", "KLauncher/0.9");
        ct.setRequestProperty("Accept-Language", "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4");
        ct.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
        ct.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
@@ -248,7 +252,8 @@ public class BaseUtils
          response = new StringBuilder();
          String line;
          while ((line = rd.readLine()) != null) {
-           response.append(line);
+        	 response.append(line);
+        	 response.append(System.lineSeparator());        	 
          }
        }
        catch (Throwable localThrowable1)
@@ -365,6 +370,7 @@ public class BaseUtils
          } else if(!e.contains(", ")) {
             return error;
          } else {
+        	 e = e.replaceAll(System.lineSeparator(), "");
             Settings.servers = e.replaceAll("<br>", "").split("<::>");
             String[] serversNames = new String[Settings.servers.length];
 
@@ -380,11 +386,12 @@ public class BaseUtils
    }
 
    public static String getURL(String path) {
-      return Settings.http + Settings.domain + path; //"http://galaxytechnology.myarena.ru" + path;
+      return Settings.http + Settings.domain + path;
    }
 
    public static String getClientName() {
-      return Settings.useMulticlient?Frame.main.servers.getSelected().replaceAll(" ", ""):"main";
+	   if(Frame.main == null) return null;
+	   return Settings.useMulticlient ? Frame.main.servers.getSelected().replaceAll(" ", "") : "main";
    }
 
    public static void openURL(String url) {
@@ -453,7 +460,7 @@ public class BaseUtils
 
          rd.close();
          String str1 = response.toString().trim();
-         send("Stream opened for " + surl + " completed, return answer: ");
+//         send("Stream opened for " + surl + " completed, return answer: ");
          return str1;
       } catch (Exception var8) {
          sendErr("Stream for " + surl + " not ensablished, return null");

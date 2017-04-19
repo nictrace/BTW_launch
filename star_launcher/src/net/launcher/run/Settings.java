@@ -1,5 +1,9 @@
 package net.launcher.run;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+import net.launcher.utils.BaseUtils;
+
 public class Settings
 {
 	/** Настройка заголовка лаунчера */
@@ -11,15 +15,15 @@ public class Settings
 	public static final String  cloaks               = "MinecraftCloaks/"; //Папка плащей
 	/** Параметры подключения */
 	public static final String  http	             = "http://";  //Протокол подключения https:// если есть ssl сертификат
-	public static final String  domain	 	         = "betweenland.myarena.ru";//Домен сайта
-	public static final String  siteDir		         = "site";//Папка с файлами лаунчера на сайте
-	public static final String RegisterUrl	         = "http://betweenland.myarena.ru/?do=register";//Ссылка на регистрацию, при useRegister = false
-	public static final String  updateFile		     = "http://betweenland.myarena.ru/site/launcher/TheBetweenLand";//Ссылка на обновления лаунчера. Не писать на конце ".exe .jar"!
-	public static final String  buyVauncherLink      = "http://betweenland.myarena.ru/"; //Ссылка на страницу покупки ваучеров
+	public static final String  domain	 	         = "betweenland.ru";//Домен сайта
+	public static final String  siteDir		         = "addons/launcher";//Папка с файлами лаунчера на сайте
+	public static final String RegisterUrl	         = "http://betweenland.ru/index.php?do=register";	//Ссылка на регистрацию, при useRegister = false
+	public static final String  updateFile		     = "http://betweenland.ru/addons/launcher/launcher/TheBetweenLand";//Ссылка на обновления лаунчера. Не писать на конце ".exe .jar"!
+	public static final String  buyVauncherLink      = "http://betweenland.ru/"; //Ссылка на страницу покупки ваучеров
 	public static final String  iMusicname           = "/assets/audio/001.mp3";
-	public static final int  thread                  = 8; //Количество потоков для загрузки файлов.
+	public static final int  thread                  = 4; //Количество потоков для загрузки файлов.
     public static boolean useMulticlient = true;			//Использовать функцию "по клиенту на сервер"
-	public static final String[] p = {"wireshark", "cheat"};  //Список запрещенных процессов.
+	public static final String[] p = {"wireshark", "cheat", "ECManager32", "ECManager64"};  //Список запрещенных процессов.
 	
 	public static final String configFilename 	= "launcher.config";
 	public static boolean patchDir = false;				 //Использовать автоматическую замену директории игры (true/false)	
@@ -57,12 +61,18 @@ public class Settings
 	
 	public static boolean debug		 	         =  true; //Отображать все действия лаунчера (отладка)(true/false)
     public static boolean drawTracers		     =  false; //Отрисовывать границы элементов лаунчера
-	public static final String masterVersion     = "0.1"; //Версия лаунчера
+	public static final String masterVersion     = "0.9"; //Версия лаунчера
 
-	public static boolean release 		         =  false;  /**Ставим true после окончания настройки! 
+	public static boolean release 		         =  false;
+															/**Ставим true после окончания настройки! 
 														    Необходимо для автообновления лаунчера 
 														    после смены ключей key1 key2.*/
-	public static void onStart() {}
-	public static void onStartMinecraft() {}
+	public static AtomicInteger GuardState		 = new AtomicInteger(0);	// состояние модуля античит  
+	public static void onStart() {
+		BaseUtils.send("*** osStart() signalled");
+	}
+	public static void onStartMinecraft() {
+		BaseUtils.send("*** osStartMinecraft() signalled");
+	}
 	
 }

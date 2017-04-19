@@ -156,6 +156,7 @@ public static void checkMods(String answer, boolean action) {
 
    }
 
+   // запретил чистить лог!
    public static void getLogs(File Logs) {
       if(!Logs.exists()) {
          Logs.mkdirs();
@@ -167,7 +168,7 @@ public static void checkMods(String answer, boolean action) {
       for(int var3 = 0; var3 < var2; ++var3) {
          File file = var1[var3];
          if(!file.isDirectory() && file.getName().contains(".log")) {
-            delete(file);
+//            delete(file);
          }
       }
 
