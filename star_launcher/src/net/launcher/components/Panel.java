@@ -31,7 +31,8 @@ import net.launcher.utils.UpdaterThread;
 public class Panel extends JPanel
 {
   private static final long serialVersionUID = 1L;
-  public static BufferedImage background = BaseUtils.getLocalImage("background");
+  // начальный бэкграунд теперь будет зависеть от выбранного сервака
+  public static BufferedImage background; // = BaseUtils.getLocalImage("background");
 //  public static BufferedImage background_personal = BaseUtils.getLocalImage("background_personal");
   public static BufferedImage background_dialog = BaseUtils.getLocalImage("background_dialog");
   public static BufferedImage background_download = BaseUtils.getLocalImage("background_download");
@@ -48,6 +49,20 @@ public class Panel extends JPanel
   
   public Panel(int type)
   {
+	  int serv = BaseUtils.getPropertyInt("server");
+	  switch(serv){
+	  case 0:
+		  background=BaseUtils.getLocalImage("bg_hitech");
+		  break;
+	  case 1:
+		  background=BaseUtils.getLocalImage("bg_divine");		  
+		  break;
+	  case 2:
+		  background=BaseUtils.getLocalImage("bg_space");		  
+		  break;
+	  default:
+		  background=BaseUtils.getLocalImage("background");		  
+	  }
     setOpaque(false);
     setLayout(null);
     setDoubleBuffered(true);

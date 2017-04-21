@@ -51,7 +51,7 @@ public class BaseUtils
       {
          if(imgs.containsKey(name)) { return imgs.get(name); }
 
-         BufferedImage e = ImageIO.read(BaseUtils.class.getResource("/net/launcher/theme/" + name + ".png"));
+         BufferedImage e = ImageIO.read(BaseUtils.class.getResource("/assets/launcher/theme/" + name + ".png"));
          imgs.put(name, e);
          send("Opened local image: " + name + ".png");
          return e;
@@ -477,10 +477,10 @@ public class BaseUtils
             send("Creating font: " + name);
 
             try {
-               e = Font.createFont(0, BaseUtils.class.getResourceAsStream("/net/launcher/theme/" + name + ".ttf"));
+               e = Font.createFont(0, BaseUtils.class.getResourceAsStream("/assets/launcher/theme/" + name + ".ttf"));
             } catch (Exception var6) {
                try {
-                  e = Font.createFont(0, BaseUtils.class.getResourceAsStream("/net/launcher/theme/" + name + ".otf"));
+                  e = Font.createFont(0, BaseUtils.class.getResourceAsStream("/assets/launcher/theme/" + name + ".otf"));
                } catch (Exception var5) {
                   var5.printStackTrace();
                }

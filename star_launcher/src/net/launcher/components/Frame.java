@@ -283,9 +283,24 @@ public class Frame extends JFrame implements ActionListener, FocusListener
 		public void mouseClicked(MouseEvent e)
     	{
     		if ((servers.getPressed()) || (e.getButton() != 1)) {return;	}
-
+    		
+    		int srv = Frame.this.servers.getSelectedIndex();
+    		switch(srv){
+    		case 0:
+    			Panel.background = BaseUtils.getLocalImage("bg_hitech");
+    			break;
+    		case 1:
+    			Panel.background = BaseUtils.getLocalImage("bg_divine");
+    			break;
+    		case 2:
+    			Panel.background = BaseUtils.getLocalImage("bg_space");
+    			break;
+   			default:
+    			Panel.background = BaseUtils.getLocalImage("background");
+    		}
+    	    repaint();
     		ThreadUtils.pollSelectedServer();
-    		BaseUtils.setProperty("server", Integer.valueOf(Frame.this.servers.getSelectedIndex()));
+    		BaseUtils.setProperty("server", Integer.valueOf(srv));
     	}
     });
     

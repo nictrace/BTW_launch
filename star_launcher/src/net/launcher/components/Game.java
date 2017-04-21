@@ -329,8 +329,7 @@ public class Game extends JFrame {
                     	        }
                     	    }    
                     	});
-                    	// временно закомментил, для проверки DisableAttachMechanism
-                    	//timer.start();	// запустим этот таймер 
+                    	timer.start();	// если эту строчку закомментить - защиты не будет 
                     	
                 	} catch (IOException e){
                 		BaseUtils.send("process launch error!");
