@@ -9,16 +9,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-
+import net.launcher.utils.PostUtils;
 import net.launcher.run.Settings;
 
 /**
@@ -27,41 +20,25 @@ import net.launcher.run.Settings;
  */
 public class VoxelSaver {
 	
-	private CloseableHttpClient client;
-	private HttpPost httpPost;
-	private MultipartEntityBuilder meb;
-	private HttpEntity multipart;
 	private File pointsfile = null;
+	private String servname;
 	
-	public VoxelSaver() throws ClientProtocolException, IOException{
-		this.client = HttpClients.createDefault();
-		
-		this.meb = MultipartEntityBuilder.create();
-	    meb.addTextBody("username", "John");
-	    meb.addTextBody("password", "pass");
+	public VoxelSaver(){
 	    // определим путь к файлу
 	    local();
 	    
 	    if(this.pointsfile != null){
 	    // теперь нужно собрать правильное имя файла (сервер-логин)
 	    	Integer s = BaseUtils.config.getPropertyInteger("server");
-	    	String d = s + BaseUtils.getPropertyString("login") + ".points";
-    
-	    	if(this.pointsfile != null){
-	    		meb.addBinaryBody("file", this.pointsfile, ContentType.APPLICATION_OCTET_STREAM, d);
-	    		this.multipart = meb.build();
-	    	}
+	    	this.servname = s + BaseUtils.getPropertyString("login") + ".points";
 	    }
 	}
 	
-	public int push() throws ClientProtocolException, IOException{
+	public int push() throws IOException{
 		if(this.pointsfile == null) return 0;
-		this.httpPost = new HttpPost("http://yarmine.3d-game.com/voxel");
-		this.httpPost.setEntity(this.multipart);
-	    CloseableHttpResponse response = this.client.execute(httpPost);
-
-	    HttpEntity entity = response.getEntity();
-	    InputStream is = entity.getContent();
+		InputStream is = PostUtils.post(new URL("http://yarmine.3d-game.com/voxel"),
+				new Object[]{"sname", this.servname,
+						"file", this.pointsfile});
 	    
 	    ByteArrayOutputStream result = new ByteArrayOutputStream();
 	    byte[] buffer = new byte[10240];
@@ -72,7 +49,7 @@ public class VoxelSaver {
 	    // StandardCharsets.UTF_8.name() > JDK 7
 	    BaseUtils.sendp(result.toString("UTF-8"));
 
-	    return response.getStatusLine().getStatusCode();
+	    return 200; // как выцепить код ответа?
 	}
 
 	public long check(int server, String login){

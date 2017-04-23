@@ -29,8 +29,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-import org.apache.http.client.ClientProtocolException;
-
 import com.sun.awt.AWTUtilities;
 
 import net.launcher.run.Settings;
@@ -554,9 +552,6 @@ public class Frame extends JFrame implements ActionListener, FocusListener
 				vs.pull(BaseUtils.getPropertyInt("server"), BaseUtils.getPropertyString("login"));
 			}
 
-		} catch (ClientProtocolException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
