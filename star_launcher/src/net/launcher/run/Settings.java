@@ -20,7 +20,7 @@ public class Settings
 	public static final String RegisterUrl	         = "http://betweenland.ru/index.php?do=register";	//Ссылка на регистрацию, при useRegister = false
 	public static final String  updateFile		     = "http://betweenland.ru/addons/launcher/launcher/TheBetweenLand";//Ссылка на обновления лаунчера. Не писать на конце ".exe .jar"!
 	public static final String  buyVauncherLink      = "http://betweenland.ru/"; //Ссылка на страницу покупки ваучеров
-	public static final String  iMusicname           = "/assets/audio/001.mp3";
+	public static final String  iMusicname           = "001.mp3";
 	public static final int  thread                  = 4; //Количество потоков для загрузки файлов.
     public static boolean useMulticlient = true;			//Использовать функцию "по клиенту на сервер"
 	public static final String[] p = {"wireshark", "cheat", "ECManager32", "ECManager64"};  //Список запрещенных процессов.

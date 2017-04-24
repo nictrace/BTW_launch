@@ -7,7 +7,7 @@ public class MusPlay {
 	private Player player;
   
 	public MusPlay(String filename)	{
-		play(filename);
+		play("/assets/audio/"+filename);
 	}
 
 	public void close(){ if (player != null) player.close(); }
