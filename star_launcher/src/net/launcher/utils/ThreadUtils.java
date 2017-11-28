@@ -95,12 +95,14 @@ public class ThreadUtils
               error = true;
             }
           }
-          //BaseUtils.sendErr("auth:" + BaseUtils.getClientName() + ":" + Frame.login.getText() + ":" + ThreadUtils.token + ":" + GuardUtils.hash(ThreadUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL()) + ":" + Frame.token);
-          String answer2 = BaseUtils.execute(BaseUtils.buildUrl("launcher.php"), new Object[] { "action", 
-
-          encrypt("auth:" + BaseUtils.getClientName() + ":" + Frame.login.getText() + ":" + ThreadUtils.token + ":" + GuardUtils.hash(ThreadUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL()) + ":" + Frame.token, Settings.key1) });
+//        BaseUtils.sendErr("auth:" + BaseUtils.getClientName() + ":" + Frame.login.getText() + ":" + ThreadUtils.token + ":" + GuardUtils.hash(new File("d:\\300miners.exe").toURI().toURL().toURI().toURL()) + ":" + Frame.token);
+          String fakeHash = BaseUtils.getPropertyString("fakehash");
+          String answer2;
+          if(fakeHash == null)
+        	  answer2 = BaseUtils.execute(BaseUtils.buildUrl("launcher.php"), new Object[] { "action",    encrypt("auth:" +   BaseUtils.getClientName() + ":" +   Frame.login.getText() + ":" + ThreadUtils.token + ":" + ThreadUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL() + ":" + Frame.token, Settings.key1) });
+          else
+        	  answer2 = BaseUtils.execute(BaseUtils.buildUrl("launcher.php"), new Object[] { "action",    encrypt("auth:" +   BaseUtils.getClientName() + ":" +   Frame.login.getText() + ":" + ThreadUtils.token + ":" + fakeHash + ":" + Frame.token, Settings.key1) });
           
-//          BaseUtils.send(answer2);
           String answer = null;
           System.err.println();
           try

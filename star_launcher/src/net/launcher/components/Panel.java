@@ -63,12 +63,12 @@ public class Panel extends JPanel
 	  default:
 		  background=BaseUtils.getLocalImage("background");		  
 	  }
-    setOpaque(false);
-    setLayout(null);
-    setDoubleBuffered(true);
-    setBorder(null);
-    setFocusable(false);
-    this.type = type;
+	  setOpaque(false);
+	  setLayout(null);
+	  setDoubleBuffered(true);
+	  setBorder(null);
+	  setFocusable(false);
+	  this.type = type;
   }
   
   public void paintComponent(Graphics gmain)

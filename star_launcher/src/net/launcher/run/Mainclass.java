@@ -22,7 +22,7 @@ public class Mainclass {
          InputStream stream = Starter.class.getResourceAsStream("/net/launcher/theme/favicon.png");
          if(stream != null) {
         	 FileOutputStream resStreamOut = null;
-        	 byte[] buffer = new byte[4096];
+        	 byte[] buffer = new byte[4096]; 
 
         	 try {
         		 resStreamOut = new FileOutputStream(new File(BaseUtils.getAssetsDir().toString() + "/favicon.png"));
@@ -30,17 +30,20 @@ public class Mainclass {
         		 int readBytes;
         		 while((readBytes = stream.read(buffer)) > 0) {
         			 resStreamOut.write(buffer, 0, readBytes);
-        		 }
+        		 }  
         	 } catch (IOException var11) {
         		 var11.printStackTrace();
         	 } finally {
         		 stream.close();
-        		 resStreamOut.close();
+        		 resStreamOut.close(); 
         	 }
          }
          
-         Frame.start();
+         // testing...
          
+         // main frame launching at same thread
+         Frame.start();
+          
          if(BaseUtils.getPropertyBoolean("Music", true)) {
         	 new MusPlay(Settings.iMusicname);
          }

@@ -553,7 +553,7 @@ public class Frame extends JFrame implements ActionListener, FocusListener
 			}
 
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			BaseUtils.sendErr("Points saver error!");
 			e1.printStackTrace();
 		}
       }

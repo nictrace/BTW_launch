@@ -50,6 +50,9 @@ public class UpdaterThread extends Thread {
          byte[] buffer = new byte[65536];
 
          String file;
+// ВРЕМЕННО!
+//         files.clear();
+//
          for(int path = 0; path < this.files.size(); ++path) {
             this.currentfile = (String)this.files.get(path);
             file = this.currentfile.replace(" ", "%20");

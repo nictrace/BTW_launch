@@ -1,8 +1,9 @@
-package net.minecraft;
+package net.launcher.components;
 
 import java.applet.Applet;
 import java.applet.AppletStub;
 import java.awt.BorderLayout;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -36,7 +37,6 @@ public class Launcher extends Applet implements AppletStub {
          return;
       }
 
-      
       new Runnable()
       {
             public void run()
@@ -51,9 +51,19 @@ public class Launcher extends Applet implements AppletStub {
       try 
       {
             BaseUtils.patchDir(cl);
-            Class<?> e = cl.loadClass("net.minecraft.client.MinecraftApplet");
+            Class<?> Mine = cl.loadClass("net.minecraft.client.MinecraftApplet");
             System.setProperty("minecraft.applet.WrapperClass", Launcher.class.getName());
-            Applet applet = (Applet)e.newInstance();
+            
+            /* вставка для 1.5.2 */
+			int i = 0;
+			for(Method m : Launcher.class.getMethods()) {
+				if(m.toString().contains("java.applet.Applet") && i == 0) {
+					System.setProperty("minecraft.applet.ReplaceMethod", m.getName());
+					i++;
+				}
+			}
+			/* конец вставки */
+            Applet applet = (Applet)Mine.newInstance();
             this.mcApplet = applet;
             applet.setStub(this);
             applet.setSize(this.getWidth(), this.getHeight());

@@ -22,6 +22,7 @@ public class VoxelSaver {
 	
 	private File pointsfile = null;
 	private String servname;
+	private final String addr = "http://yarmine.3d-game.com/voxel"; 
 	
 	public VoxelSaver(){
 	    // определим путь к файлу
@@ -36,7 +37,7 @@ public class VoxelSaver {
 	
 	public int push() throws IOException{
 		if(this.pointsfile == null) return 0;
-		InputStream is = PostUtils.post(new URL("http://yarmine.3d-game.com/voxel"),
+		InputStream is = PostUtils.post(new URL(this.addr),
 				new Object[]{"sname", this.servname,
 						"file", this.pointsfile});
 	    
@@ -53,7 +54,7 @@ public class VoxelSaver {
 	}
 
 	public long check(int server, String login){
-		String resp = BaseUtils.runHTTP("http://yarmine.3d-game.com/voxel", "?fname="+server+login, true);
+		String resp = BaseUtils.runHTTP(this.addr, "?fname="+server+login, true);
 		if(resp == null) return -1;
 		resp = resp.replaceAll(System.lineSeparator(), "");
 		return Long.parseLong(resp);

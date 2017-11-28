@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="project" default="yguard" basedir=".">
+	<!-- edit the following lines to your needs -->
+	<target name="init">
+		<property name="project_name" value="n2launch"/>
+		<property name="srcDir" value="star_launcher/src"/>
+		<property name="classDir" value="classes"/>
+		<property name="jar" value="${project_name}.jar"/>
+		<property name="obfjar" value="${project_name}_obf.jar"/>
+		<property name="renamelog" value="${project_name}_renamelog.xml"/>
+		<property name="shrinklog" value="${project_name}_shrinklog.xml"/>
+		<property name="mainclass" value="net.launcher.run.Starter"/>
+		<mkdir dir="${classDir}" />
+	</target>
+
+	<target name="yguard" depends="jar">
+		<taskdef name="yguard" classname="com.yworks.yguard.YGuardTask" classpath="yguard.jar"/>
+		<!-- the following can be adjusted to your needs -->
+		<yguard>
+			<inoutpair in="${jar}" out="${obfjar}"/>
+			<shrink logfile="${shrinklog}">
+				<keep>
+					<method name="void main(java.lang.String[])" class="net.launcher.run.Starter" />
+					<method name="void main(java.lang.String[])" class="net.launcher.run.Mainclass" />
+					<class classes="protected" methods="protected" fields="protected" >
+					
+					</class>
+				</keep>
+			</shrink>
+
+			<rename mainclass="${mainclass}" logfile="${renamelog}">
+				<property name="language-conformity" value="illegal"/>
+				<property name="naming-scheme" value="mix"/>
+				<property name="error-checking" value="pedantic"/>
+				<keep>
+					<class classes="protected" />
+				</keep>
+			</rename>
+		</yguard>
+    </target>
+
+    <!-- compile -->
+    <target name="compile" depends="init">
+      <javac encoding="UTF-8" srcdir="${srcDir}" includes="net/**/*.java" destdir="${classDir}">
+      </javac>
+    </target>
+
+    <!-- create .jar -->
+    <target name="jar" depends="compile">
+      <jar jarfile="${jar}" basedir="${classDir}" includes="**">
+		<manifest>
+			<attribute name="Main-Class" value="${mainclass}"/>
+		</manifest>
+        <fileset dir="${srcDir}/../resources">
+          <include name="assets/**"/>
+        </fileset>
+      </jar>
+    </target>
+
+    <!-- run project -->
+    <target name="run" depends="yguard">
+      <java classname="${mainclass}" fork="true">
+      <classpath>
+        <pathelement location="${obfjar}"/>
+      </classpath>
+      </java>
+    </target>
+
+    <!-- removes all that has been built -->
+    <target name="clean" depends="init">
+      <delete dir="${classDir}" includeEmptyDirs="true" />
+    </target>
+</project>
+<!-- end file build.xml -->

@@ -75,7 +75,7 @@ public class GuardUtils {
          if(!sit.contains(check) && !check.contains(dir + "/assets/skins/")) {
             File var19 = new File(check.split(":>")[0]);
             System.err.println("Delete -> " + var19);
-            delete(var19);
+            if(Settings.useModCheckerTimer) delete(var19);
             ret = true;
          }
       }

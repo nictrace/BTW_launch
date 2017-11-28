@@ -33,7 +33,6 @@ import net.launcher.utils.BaseUtils;
 import net.launcher.utils.EncodingUtils;
 import net.launcher.utils.GuardUtils;
 import net.launcher.utils.java.eURLClassLoader;
-import net.minecraft.Launcher;
 
 public class Game extends JFrame {
     private static final long serialVersionUID = 1;
@@ -69,7 +68,7 @@ public class Game extends JFrame {
             @Override
             public void run() {
                 do {
-                    GuardUtils.check();
+                    GuardUtils.check();		// поиск запущенных читов
                     try {
                         Thread.sleep(30000);
                         continue;
@@ -100,7 +99,7 @@ public class Game extends JFrame {
                     }
                 }
             });
-            check.start();
+            if(Settings.useModCheckerTimer) check.start();
             try {
                 this.addWindowListener(new WindowListener(){
 
@@ -192,7 +191,7 @@ public class Game extends JFrame {
                     }
                 }
             });
-            check.start();
+            if(Settings.useModCheckerTimer) check.start();
             try {
                 System.out.println("Running Minecraft");
                 String jarpath = BaseUtils.getMcDir().toString() + File.separator;

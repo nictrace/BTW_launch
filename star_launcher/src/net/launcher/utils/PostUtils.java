@@ -1,3 +1,8 @@
+/**
+ * Модуль для выполнения запросов HTTP POST
+ * Вызов: PostUtils.post(new URL(String address), new Object[]{String name, String value, ...});
+ * где value может иметь тип File и относиться к локальному файлу, который будет передан на сервер
+ */
 package net.launcher.utils;
 
 import java.io.File;
@@ -150,6 +155,13 @@ public class PostUtils {
       return this.post();
    }
 
+   /**
+    * 
+    * @param url - аналог поля action в веб-форме
+    * @param parameters - Object[], в котором имена параметров чередуются со значениями
+    * @return InputStream для получения ответа сервера
+    * @throws IOException
+    */
    public static InputStream post(URL url, Object[] parameters) throws IOException {
       return (new PostUtils(url)).post(parameters);
    }
